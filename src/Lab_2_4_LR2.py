@@ -13,7 +13,10 @@ class LinearRegressor:
     def __init__(self):
         self.coefficients = None
         self.intercept = None
-
+        self.iter = []
+        self.MSE = []
+        self.hist_coef = []
+        self.hist_intercept = []
     """
     This next "fit" function is a general function that either calls the *fit_multiple* code that
     you wrote last week, or calls a new method, called *fit_gradient_descent*, not implemented (yet)
@@ -108,7 +111,12 @@ class LinearRegressor:
             # TODO: Calculate and print the loss every 10 epochs
             if epoch % 10 == 0:
                 mse = np.mean(error ** 2)
+                self.iter.append(epoch)
+                self.MSE.append(mse)
+                self.hist_coef.append(self.coefficients)
+                self.hist_intercept.append(self.intercept)
                 print(f"Epoch {epoch}: MSE = {mse}")
+
 
     def predict(self, X):
         """
